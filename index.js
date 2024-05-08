@@ -1,8 +1,6 @@
 const server = require('http').createServer();
-const link = 'http://localhost:3000';
 
-server.listen(3000, () => console.log(link));
-
+server.listen(3000, () => console.log('http://localhost:3000'));
 server.on('request', handleRequest);
 
 function handleRequest(request, response) {
@@ -11,21 +9,20 @@ function handleRequest(request, response) {
   let body = '';
 
   request.on('data', chunk => body += chunk);
-
   request.on('end', () => {
     try {
       body = JSON.parse(body);
     } catch { }
 
-    console.log('received:', body);
-
     const entries = Object.entries(body);
-
-    console.log('sent:', entries);
-
     const json = JSON.stringify(entries);
-
-    response.writeHead(200, { 'Content-Type': 'text/json' }).end(json);
+    
+    console.log('received:', body);
+    console.log('sent:', entries);
+    response.writeHead(200, {
+      'Content-Type': 'text/json',
+      'Access-Control-Allow-Origin': '*',
+    }).end(json);
   })
 }
 
