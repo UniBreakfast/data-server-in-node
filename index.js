@@ -22,6 +22,8 @@ function handleRequest(request, response) {
     response.writeHead(200, {
       'Content-Type': 'text/json',
       'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'HEAD, GET, POST, PUT, PATCH, DELETE, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type, Origin, Accept, Authorization, X-Request-With',
     }).end(json);
   })
 }
